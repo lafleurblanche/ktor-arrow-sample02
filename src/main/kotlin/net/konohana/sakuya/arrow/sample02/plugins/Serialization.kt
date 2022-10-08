@@ -10,6 +10,7 @@ import io.ktor.server.plugins.contentnegotiation.ContentNegotiation
 import io.ktor.server.response.respond
 import io.ktor.server.routing.get
 import io.ktor.server.routing.routing
+import net.konohana.sakuya.arrow.sample02.router.sampleRouter
 
 fun Application.configureSerialization() {
     install(ContentNegotiation) {
@@ -26,5 +27,6 @@ fun Application.configureSerialization() {
         get("/json/kotlinx-serialization") {
             call.respond(mapOf("hello" to "world"))
         }
+        sampleRouter()
     }
 }
