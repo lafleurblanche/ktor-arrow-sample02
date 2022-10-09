@@ -1,5 +1,9 @@
 package net.konohana.sakuya.arrow.sample02.constant
 
+/**
+ * エラーコード定数クラス
+ * @author lafleurblanche
+ */
 class ErrorCodeConst {
     companion object {
         /** エラーコード: コート形式誤り */
