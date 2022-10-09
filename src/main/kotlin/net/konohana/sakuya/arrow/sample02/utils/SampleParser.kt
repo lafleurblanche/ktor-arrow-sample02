@@ -1,6 +1,8 @@
 package net.konohana.sakuya.arrow.sample02.utils
 
 import arrow.core.Either
+import net.konohana.sakuya.arrow.sample02.constant.ErrorCodeConst
+import net.konohana.sakuya.arrow.sample02.constant.FromStaCodePatternConst
 
 open class Error {
     object NotANumber : Error()
@@ -8,7 +10,7 @@ open class Error {
 }
 
 fun stringify(s:String): Either<Error, String> =
-    if (!s.startsWith("FRCE")) Either.Left(Error.NotACode)
+    if (!s.startsWith(FromStaCodePatternConst.CODE_PATTERN_CERISIER)) Either.Left(Error.NotACode)
     else if (s.length != 8) Either.Left(Error.NotACode)
     else Either.Right(s.substring(4,8))
 
@@ -19,7 +21,7 @@ fun check(s: String): String {
             result.value
         }
         is Either.Left -> when (result.value) {
-            is Error.NotACode -> "コードでない"
+            is Error.NotACode -> ErrorCodeConst.ERROR_101
             else -> ""
         }
     }
