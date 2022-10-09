@@ -9,16 +9,13 @@ import io.ktor.server.response.respond
 import io.ktor.server.response.respondText
 import io.ktor.server.routing.get
 import io.ktor.server.routing.routing
+import net.konohana.sakuya.arrow.sample02.exception.CodeMismatchException
 
 fun Application.configureRouting() {
     install(StatusPages) {
-        exception<AuthenticationException> { call, _ ->
-            call.respond(HttpStatusCode.Unauthorized)
+        exception<CodeMismatchException> { call, _ ->
+            call.respond(HttpStatusCode.BadRequest, mapOf("result" to "コード形式誤り"))
         }
-        exception<AuthorizationException> { call, _ ->
-            call.respond(HttpStatusCode.Forbidden)
-        }
-    
     }
 
     routing {
@@ -27,6 +24,3 @@ fun Application.configureRouting() {
         }
     }
 }
-
-class AuthenticationException : RuntimeException()
-class AuthorizationException : RuntimeException()
