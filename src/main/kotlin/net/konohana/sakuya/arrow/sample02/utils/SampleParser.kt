@@ -29,7 +29,20 @@ fun check(s: String): String {
     return res
 }
 
-
+fun checkNumber(s: String): String {
+    println("checkvalue${s}")
+    val res2 = when(val result = parse(s)) {
+        is Either.Left -> when (result.value) {
+            is Error.NotANumber -> ErrorCodeConst.ERROR_102
+            else -> ""
+        }
+        is Either.Right -> {
+            result.value.toString()
+        }
+    }
+    print(res2)
+    return res2
+}
 
 fun parse(s:String): Either<Error, Int> =
 

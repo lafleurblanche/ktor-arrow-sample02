@@ -8,6 +8,7 @@ import io.ktor.server.routing.route
 import net.konohana.sakuya.arrow.sample02.constant.ErrorCodeConst
 import net.konohana.sakuya.arrow.sample02.exception.CodeMismatchException
 import net.konohana.sakuya.arrow.sample02.utils.check
+import net.konohana.sakuya.arrow.sample02.utils.checkNumber
 
 fun Route.sampleController() {
     route("sample") {
@@ -19,7 +20,11 @@ fun Route.sampleController() {
             if (rst == ErrorCodeConst.ERROR_101) {
                 throw CodeMismatchException("コード形式誤り")
             }
-            call.respond(mapOf("result" to rst))
+            val rst2 = checkNumber(rst)
+            if (rst2 == ErrorCodeConst.ERROR_102) {
+                throw CodeMismatchException("コード形式誤り")
+            }
+            call.respond(mapOf("result" to rst2))
         }
     }
 }
