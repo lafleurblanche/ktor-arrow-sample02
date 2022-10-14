@@ -9,11 +9,17 @@ open class Error {
     object NotACode : Error()
 }
 
+/**
+ * コード形式チェック
+ */
 fun stringify(s:String): Either<Error, String> =
     if (!s.startsWith(FromStaCodePatternConst.CODE_PATTERN_CERISIER)) Either.Left(Error.NotACode)
     else if (s.length != 8) Either.Left(Error.NotACode)
     else Either.Right(s.substring(4,8))
 
+/**
+ * コードチェック
+ */
 fun check(s: String): String {
     println("check${s}")
     val res = when(val result = stringify(s)) {
@@ -29,6 +35,9 @@ fun check(s: String): String {
     return res
 }
 
+/**
+ * コード値チェック
+ */
 fun checkNumber(s: String): String {
     println("checkvalue${s}")
     val res2 = when(val result = parse(s)) {
